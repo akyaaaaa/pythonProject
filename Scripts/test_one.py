@@ -19,7 +19,7 @@ class TestDemo:
     def test3(self, RecordAVideoWhenFails, e):
         time.sleep(3)
         # 获取录屏路径
-        video_path = RecordAVideoWhenFails["video_path"]
+        # video_path = RecordAVideoWhenFails["video_path"]
         # 测试逻辑
         assert False, "This is a test failure."
 

@@ -6,9 +6,11 @@ from uiautomator2 import connect
 from appium import webdriver
 from Base.Base import Base
 
-# 创建 screenshots 目录
-if not os.path.exists("screenshots"):
-    os.makedirs("screenshots")
+# 创建 FailureVideo 目录
+failure_video_dir = "FailureVideo"
+if not os.path.exists(failure_video_dir):
+    os.makedirs(failure_video_dir)
+
 
 # UIAutomator2 驱动
 @pytest.fixture(scope="session")
@@ -17,6 +19,7 @@ def d():
     d = connect('aeada375')
     yield d
     print("Disconnecting from device...")
+
 
 # Appium 驱动
 @pytest.fixture(scope="session")
@@ -38,9 +41,8 @@ def ad():
 # 录屏功能
 @pytest.fixture(scope="function")
 def RecordAVideoWhenFails(e, request):
-    # 确保路径是一致的
-    base_dir = os.getcwd()  # 获取当前工作目录
-    video_path = os.path.join(base_dir, f"screenshots/video_{time.strftime('%Y%m%d_%H%M%S')}.mp4")
+    # 确保路径是一一致的
+    video_path = os.path.join(failure_video_dir, f"{request.cls.__name__}_{time.strftime('%Y%m%d_%H%M%S')}.mp4")
 
     # 开始录屏
     e.start_recording_screen()
@@ -66,18 +68,20 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(autouse=True)
 def hook_finalization(request, tmp_path):
     yield
-    if request.node.rep_call.failed:
-        video_path = os.path.join(tmp_path, f"video_{time.strftime('%Y%m%d_%H%M%S')}.mp4")
-        with open(video_path, "wb") as video_file:
-            video_file.write(request.node.video_data)
-        print(f"视频已保存到: {video_path}")
-        # 尝试附加到 Allure 报告
-        try:
-            with open(video_path, 'rb') as f:
-                allure.attach(f.read(), "Video Recording", allure.attachment_type.MP4)
-            print("视频已附加到 Allure 报告")
-        except Exception as e:
-            print(f"Failed to attach video to Allure report: {e}")
+    if hasattr(request.node, 'video_data'):
+        if request.node.rep_call.failed:
+            video_path = os.path.join(failure_video_dir,
+                                      f"{request.node.originalname}_{time.strftime('%Y%m%d_%H%M%S')}.mp4")
+            with open(video_path, "wb") as video_file:
+                video_file.write(request.node.video_data)
+            print(f"视频已保存到: {video_path}")
+            # 尝试附加到 Allure 报告
+            try:
+                with open(video_path, 'rb') as f:
+                    allure.attach(f.read(), video_path, allure.attachment_type.MP4)
+                print("视频已附加到 Allure 报告")
+            except Exception as e:
+                print(f"Failed to attach video to Allure report: {e}")
 
 # Base 类实例化
 @pytest.fixture(scope="session")

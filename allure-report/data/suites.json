@@ -1,1 +1,43 @@
-{"uid":"98d3104e051c652961429bf95fa0b5d6","name":"suites","children":[{"name":"Scripts","children":[{"name":"test_one","children":[{"name":"TestDemo","children":[{"name":"test3","uid":"6cc236126fefb954","parentUid":"04f69b326aaee1544d6deb609de1a8ea","status":"failed","time":{"start":1726584328600,"stop":1726584331600,"duration":3000},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]}],"uid":"04f69b326aaee1544d6deb609de1a8ea"}],"uid":"3b034d3f692bbbc14b7b77aa5de51a61"}],"uid":"ac537b8f55a60b2e2381ee5657079cea"}]}
+{
+  "uid": "98d3104e051c652961429bf95fa0b5d6",
+  "name": "suites",
+  "children": [
+    {
+      "name": "Scripts",
+      "children": [
+        {
+          "name": "test_one",
+          "children": [
+            {
+              "name": "TestDemo",
+              "children": [
+                {
+                  "name": "test3",
+                  "uid": "ae9164dbd01bb90c",
+                  "parentUid": "04f69b326aaee1544d6deb609de1a8ea",
+                  "status": "failed",
+                  "time": {
+                    "start": 1726585868570,
+                    "stop": 1726585871571,
+                    "duration": 3001
+                  },
+                  "flaky": false,
+                  "newFailed": false,
+                  "newPassed": false,
+                  "newBroken": false,
+                  "retriesCount": 0,
+                  "retriesStatusChange": false,
+                  "parameters": [],
+                  "tags": []
+                }
+              ],
+              "uid": "04f69b326aaee1544d6deb609de1a8ea"
+            }
+          ],
+          "uid": "3b034d3f692bbbc14b7b77aa5de51a61"
+        }
+      ],
+      "uid": "ac537b8f55a60b2e2381ee5657079cea"
+    }
+  ]
+}
