@@ -5,7 +5,6 @@ import time
 
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -50,6 +49,7 @@ class Base:
                         elements[0].click()
                         return func(*args, **kwargs)
                 # todo 遍历完黑名单之后，如果仍然没有找到元素，就抛出异常
+                self.add_screenshot_to_allure("错误截图")
                 logging.error(f"遍历黑名单，仍然未找到元素信息————>>{e}")
                 raise e
 
@@ -57,28 +57,23 @@ class Base:
 
     @black_wrapper
     def few(self, strategy, value):
-        try:
-            if strategy == 'text':
-                # 使用普通文本匹配
-                element = WebDriverWait(self.driver, 10).until(
-                    self.find_by_text(value)
-                )
-            elif strategy == 'regex_text':
-                # 使用正则表达式匹配文本
-                element = WebDriverWait(self.driver, 10).until(
-                    self.find_by_regex_text(value)
-                )
-            else:
-                # 使用通用查找策略。BY.xxx之类的
-                element = WebDriverWait(self.driver, 10).until(
-                    EC.presence_of_element_located((strategy, value))
-                )
-            return element
-        except TimeoutException:
-            # 如果找不到元素，则截图
-            print("开始截图")
-            self.add_screenshot_to_allure("错误截图")
-            raise
+
+        if strategy == 'text':
+            # 使用普通文本匹配
+            element = WebDriverWait(self.driver, 10).until(
+                self.find_by_text(value)
+            )
+        elif strategy == 'regex_text':
+            # 使用正则表达式匹配文本
+            element = WebDriverWait(self.driver, 10).until(
+                self.find_by_regex_text(value)
+            )
+        else:
+            # 使用通用查找策略。BY.xxx之类的
+            element = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((strategy, value))
+            )
+        return element
 
     def find_by_text(self, value):
         return EC.presence_of_element_located((By.XPATH, f"//*[@text='{value}']"))
