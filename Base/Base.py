@@ -1,20 +1,26 @@
 import base64
+import logging
 import os
-import re
 import time
 
 import allure
+from appium.webdriver.common.appiumby import AppiumBy
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
-from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
+
+black_list = [(AppiumBy.ID, "com.vivo.health:id/positiveButton")]
+
+
+# 黑名单装饰器
 
 
 class Base:
 
     def __init__(self, driver):
         self.driver = driver
+
     # 截图并返回路径
     def take_screenshot(self, filename):
         # 从当前时间获取一个格式化的数字
@@ -27,6 +33,29 @@ class Base:
         return filepath
 
         # 显示等待查找
+
+    def black_wrapper(func):
+        # @functools.wraps(func)
+        def run(*args, **kwargs):
+            self = args[0]
+            try:
+                # 调用原来的函数并返回结果
+                return func(*args, **kwargs)
+            except Exception as e:
+                for black in black_list:
+                    # 查找黑名单中的每一个元素
+                    logging.warning(f"处理黑名单:{black}")
+                    elements = self.driver.find_elements(*black)
+                    if len(elements) > 0:
+                        elements[0].click()
+                        return func(*args, **kwargs)
+                # todo 遍历完黑名单之后，如果仍然没有找到元素，就抛出异常
+                logging.error(f"遍历黑名单，仍然未找到元素信息————>>{e}")
+                raise e
+
+        return run
+
+    @black_wrapper
     def few(self, strategy, value):
         try:
             if strategy == 'text':
