@@ -9,12 +9,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-black_list = [(AppiumBy.ID, "com.vivo.health:id/positiveButton")]
+# 创建一个logger对象
+logger = logging.getLogger("my logger")
+black_list = [
+    (AppiumBy.ID, "com.vivo.health:id/positiveButton")
+]
 
 
 # 黑名单装饰器
-
-
 class Base:
 
     def __init__(self, driver):
@@ -34,23 +36,24 @@ class Base:
         # 显示等待查找
 
     def black_wrapper(func):
-        # @functools.wraps(func)
         def run(*args, **kwargs):
             self = args[0]
             try:
+                logger.info(f"开始查找元素{args[2]}")
                 # 调用原来的函数并返回结果
                 return func(*args, **kwargs)
+            # 此处的e,代表只捕获e这一种类型的exception
             except Exception as e:
                 for black in black_list:
                     # 查找黑名单中的每一个元素
-                    logging.warning(f"处理黑名单:{black}")
+                    logger.warning(f"处理黑名单:{black}")
                     elements = self.driver.find_elements(*black)
                     if len(elements) > 0:
                         elements[0].click()
                         return func(*args, **kwargs)
-                # todo 遍历完黑名单之后，如果仍然没有找到元素，就抛出异常
+                # 遍历完黑名单之后，如果仍然没有找到元素，就抛出异常
                 self.add_screenshot_to_allure("错误截图")
-                logging.error(f"遍历黑名单，仍然未找到元素信息————>>{e}")
+                logger.error(f"遍历黑名单，仍然未找到元素信息————>>{e}")
                 raise e
 
         return run

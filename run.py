@@ -1,6 +1,11 @@
+import logging
 import os
 
 import pytest
+
+logging.basicConfig(filename='log/mylog.txt', filemode='w',
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s -%(pathname)s - %(process)d',
+                    level=logging.INFO)
 
 if __name__ == '__main__':
     pytest.main(['-vs', '--alluredir=./temp', '--clean-alluredir'])

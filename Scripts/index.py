@@ -16,7 +16,7 @@ def format_attribute_value(value):
         return repr(value)
 
 
-def create_python_class_file(class_name, buzhou, jieguo,mudi):
+def create_python_class_file(class_name, buzhou, jieguo, mudi):
     # 清洗类名
     class_name = sanitize_class_name(class_name)
 
@@ -77,7 +77,7 @@ def main():
         mudi = row.iloc[6]
 
         # 创建对应的 .py 文件
-        create_python_class_file(class_name, buzhou, jieguo,mudi)
+        create_python_class_file(class_name, buzhou, jieguo, mudi)
 
 
 if __name__ == '__main__':

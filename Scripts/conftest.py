@@ -1,9 +1,11 @@
 import os
 import time
+
 import allure
 import pytest
-from uiautomator2 import connect
 from appium import webdriver
+from uiautomator2 import connect
+
 from Base.Base import Base
 
 # 创建 FailureVideo 目录
@@ -38,6 +40,7 @@ def ad():
     yield driver
     driver.quit()
 
+
 # 录屏功能
 @pytest.fixture(scope="function")
 def RecordAVideoWhenFails(e, request):
@@ -54,6 +57,7 @@ def RecordAVideoWhenFails(e, request):
         video_data = e.stop_recording_screen()
         request.node.video_data = video_data  # 保存录制的数据供后续使用
 
+
 # 自定义hook来捕获测试结果
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -63,6 +67,7 @@ def pytest_runtest_makereport(item, call):
     # set a report attribute for each phase of a call, which can
     # be "setup", "call", "teardown"
     setattr(item, "rep_" + rep.when, rep)
+
 
 # 自定义hook在测试结束时保存视频
 @pytest.fixture(autouse=True)
@@ -82,6 +87,7 @@ def hook_finalization(request, tmp_path):
                 print("视频已附加到 Allure 报告")
             except Exception as e:
                 print(f"Failed to attach video to Allure report: {e}")
+
 
 # Base 类实例化
 @pytest.fixture(scope="session")

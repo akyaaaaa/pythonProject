@@ -8,8 +8,9 @@ class TestDemo:
 
     def setUp(self):
         return 1
+
     def tearDown(self):
-       return 1
+        return 1
 
     @allure.feature('打开vivo健康')
     def test3(self, e, ad):
@@ -19,7 +20,6 @@ class TestDemo:
         e.few('text', '每日活动').click()
         # assert False, "This is a test failure."
 
+
 if __name__ == '__main__':
     pytest.main()
-
-
