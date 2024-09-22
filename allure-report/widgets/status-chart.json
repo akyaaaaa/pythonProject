@@ -1,13 +1,13 @@
 [
   {
-    "uid": "ae9164dbd01bb90c",
+    "uid": "eb1674785626bbe",
     "name": "test3",
     "time": {
-      "start": 1726585868570,
-      "stop": 1726585871571,
-      "duration": 3001
+      "start": 1726927290436,
+      "stop": 1726927294589,
+      "duration": 4153
     },
-    "status": "failed",
+    "status": "passed",
     "severity": "normal"
   }
 ]

@@ -13,13 +13,13 @@
               "children": [
                 {
                   "name": "test3",
-                  "uid": "ae9164dbd01bb90c",
+                  "uid": "eb1674785626bbe",
                   "parentUid": "04f69b326aaee1544d6deb609de1a8ea",
-                  "status": "failed",
+                  "status": "passed",
                   "time": {
-                    "start": 1726585868570,
-                    "stop": 1726585871571,
-                    "duration": 3001
+                    "start": 1726927290436,
+                    "stop": 1726927294589,
+                    "duration": 4153
                   },
                   "flaky": false,
                   "newFailed": false,

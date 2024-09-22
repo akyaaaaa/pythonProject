@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Scripts/bcr_345.py" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/log/mylog.log" charset="GBK" />
     <file url="file://$PROJECT_DIR$/log/mylog.txt" charset="GBK" />
   </component>
 </project>

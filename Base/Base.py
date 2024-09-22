@@ -1,9 +1,9 @@
 import base64
 import logging
-import os
-import time
 
 import allure
+import pytest
+from airtest.core.api import *
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -101,6 +101,30 @@ class Base:
             video_data = base64.b64decode(video_data)
         assert isinstance(video_data, bytes), "The video data should be of type bytes."
         return video_data
+
+    # 图像识别
+    def ClickByImage(self, imgPath):
+        # 使用 Airtest 进行图像识别
+        try:
+            # 连接 Airtest 设备
+            dev = connect_device("Android:///aeada375")
+            assert dev is not None, "设备连接失败"
+            # 定义模板
+            template = Template(imgPath)
+            # 匹配图像并获取位置
+            pos = exists(template)
+            if pos:
+                logger.info(f"图像识别成功，位置: {pos}")
+                # 点击匹配到的图像位置
+                touch(pos)
+                time.sleep(2)
+                # todo 验证是否成功点击
+                # assert exists(Template(r"aixin.jpg")), "登录成功"
+            else:
+                logger.error("图像未找到")
+                pytest.fail("图像未找到")
+        except TargetNotFoundError:
+            pytest.fail("图像未找到")
 
 
 if __name__ == '__main__':

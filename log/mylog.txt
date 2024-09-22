@@ -1,9 +1,0 @@
-2024-09-02 21:51:34,213 - my logger - DEBUG - debug 日志
-2024-09-02 21:51:34,213 - my logger - INFO - info 日志
-2024-09-02 21:51:34,213 - my logger - WARNING - warning 日志
-2024-09-02 21:51:34,213 - my logger - ERROR - error 日志
-2024-09-02 21:51:34,213 - my logger - CRITICAL - critical 日志
-2024-09-02 21:54:01,306 - my logger - ERROR - error 日志
-2024-09-02 21:54:01,306 - my logger - CRITICAL - critical 日志
-2024-09-02 21:58:59,225 - my logger - ERROR - error 日志 -C:\Users\Administrator\pythonProject\log\log.py - 9328
-2024-09-02 21:58:59,225 - my logger - CRITICAL - critical 日志 -C:\Users\Administrator\pythonProject\log\log.py - 9328

@@ -1,5 +1,3 @@
-import time
-
 import allure
 import pytest
 
@@ -14,12 +12,12 @@ class TestDemo:
 
     @allure.feature('打开vivo健康')
     def test3(self, e, ad):
-        e.few('text', 'vivo健康').click()
-        # 等待弹出窗口出现
-        time.sleep(1)
-        e.few('text', '每日活动').click()
-        # assert False, "This is a test failure."
-
+        # e.few('text', 'vivo健康').click()
+        # # 等待弹出窗口出现
+        # time.sleep(1)
+        # e.few('text', '每日活动').click()
+        # # assert False, "This is a test failure."
+        e.ClickByImage('jiangkang.jpg')
 
 if __name__ == '__main__':
     pytest.main()

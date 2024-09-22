@@ -1,12 +1,11 @@
 import logging
 
-
 # 创建一个logger对象
 logger = logging.getLogger("my logger")
 logger.setLevel(40)
 handle = logging.FileHandler("mylog.txt")
 
-fmt  = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s -%(pathname)s - %(process)d')
+fmt = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s -%(pathname)s - %(process)d')
 handle.setFormatter(fmt)
 # 将handle加入到logger中
 logger.addHandler(handle)
