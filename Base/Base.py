@@ -108,6 +108,7 @@ class Base:
         try:
             # 连接 Airtest 设备
             dev = connect_device("Android:///aeada375")
+
             assert dev is not None, "设备连接失败"
             # 定义模板
             template = Template(imgPath)
@@ -117,7 +118,7 @@ class Base:
                 logger.info(f"图像识别成功，位置: {pos}")
                 # 点击匹配到的图像位置
                 touch(pos)
-                time.sleep(2)
+                # time.sleep(2)
                 # todo 验证是否成功点击
                 # assert exists(Template(r"aixin.jpg")), "登录成功"
             else:

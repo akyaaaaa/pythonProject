@@ -18,6 +18,7 @@ class TestDemo:
         # e.few('text', '每日活动').click()
         # # assert False, "This is a test failure."
         e.ClickByImage('jiangkang.jpg')
+        print("哈哈哈哈")
 
 if __name__ == '__main__':
     pytest.main()
