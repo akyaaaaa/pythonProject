@@ -1,17 +1,1 @@
-{
-  "total": 1,
-  "items": [
-    {
-      "uid": "e9889a0d971f2e06f25696dc0fb51278",
-      "name": "打开vivo健康",
-      "statistic": {
-        "failed": 0,
-        "broken": 0,
-        "skipped": 0,
-        "passed": 1,
-        "unknown": 0,
-        "total": 1
-      }
-    }
-  ]
-}
+{"total":1,"items":[{"uid":"e9889a0d971f2e06f25696dc0fb51278","name":"打开vivo健康","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}

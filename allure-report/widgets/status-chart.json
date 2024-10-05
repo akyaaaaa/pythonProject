@@ -1,13 +1,1 @@
-[
-  {
-    "uid": "eb1674785626bbe",
-    "name": "test3",
-    "time": {
-      "start": 1726927290436,
-      "stop": 1726927294589,
-      "duration": 4153
-    },
-    "status": "passed",
-    "severity": "normal"
-  }
-]
+[{"uid":"9c5108d1c95ae844","name":"test3","time":{"start":1728109638003,"stop":1728109638946,"duration":943},"status":"passed","severity":"normal"}]

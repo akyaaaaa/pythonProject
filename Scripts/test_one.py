@@ -13,12 +13,14 @@ class TestDemo:
     @allure.feature('打开vivo健康')
     def test3(self, e, ad):
         # e.few('text', 'vivo健康').click()
-        # # 等待弹出窗口出现
-        # time.sleep(1)
-        # e.few('text', '每日活动').click()
-        # # assert False, "This is a test failure."
-        e.ClickByImage('jiangkang.jpg')
+        # e.ClickByImage('jiangkang.jpg')
         print("哈哈哈哈")
+        print(e.find_element_by_ocr(''))
+        # f.goToDesAndCleanUpData(ad)
+
+    def test4(self, e, ad):
+        e.find_element_by_ocr('每日活动')
+
 
 if __name__ == '__main__':
     pytest.main()

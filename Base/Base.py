@@ -9,6 +9,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+from BaiDuOCR.ocr import return_local
+from userConf.config import OCR_SCREENSHOT_PATH
+
 # 创建一个logger对象
 logger = logging.getLogger("my logger")
 black_list = [
@@ -71,6 +74,10 @@ class Base:
             element = WebDriverWait(self.driver, 10).until(
                 self.find_by_regex_text(value)
             )
+        elif strategy == 'xpath':
+            element = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, value))
+            )
         else:
             # 使用通用查找策略。BY.xxx之类的
             element = WebDriverWait(self.driver, 10).until(
@@ -83,6 +90,22 @@ class Base:
 
     def find_by_regex_text(self, regex):
         return EC.presence_of_element_located((By.XPATH, f"//*[matches(@text,'{regex}')]"))
+
+    def find_element_by_ocr(self, text):
+        # 获取屏幕截图
+        # try:
+        screenshot_path = OCR_SCREENSHOT_PATH
+        self.driver.save_screenshot(screenshot_path)
+        # path = os.path.dirname()
+        local = return_local(text, screenshot_path)
+        print('qweqweqweweqweqweqwe')
+        print(local)
+        self.driver.tap([(local[0], local[1])])
+
+    # except Exception as e:
+    #     return '未找到元素'
+
+
 
     def add_screenshot_to_allure(self, name, attachment_type=allure.attachment_type.PNG):
         """将截图添加到 Allure 报告中"""

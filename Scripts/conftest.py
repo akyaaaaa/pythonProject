@@ -34,6 +34,7 @@ def ad():
         # 'unicodeKeyboard': True,  # 使用自带输入法，输入中文时填True
         # 'resetKeyboard': True,  # 执行完程序恢复原来输入法
     }
+
     # 连接Appium Server，初始化自动化环境
     driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
     print("连接成功")
