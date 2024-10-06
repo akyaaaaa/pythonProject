@@ -91,14 +91,13 @@ class Base:
     def find_by_regex_text(self, regex):
         return EC.presence_of_element_located((By.XPATH, f"//*[matches(@text,'{regex}')]"))
 
-    def find_element_by_ocr(self, text):
+    def click_element_by_ocr(self, text):
         # 获取屏幕截图
         # try:
         screenshot_path = OCR_SCREENSHOT_PATH
         self.driver.save_screenshot(screenshot_path)
         # path = os.path.dirname()
         local = return_local(text, screenshot_path)
-        print('qweqweqweweqweqweqwe')
         print(local)
         self.driver.tap([(local[0], local[1])])
 

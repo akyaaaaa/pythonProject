@@ -14,6 +14,7 @@
       <excludeFolder url="file://$MODULE_DIR$/allure-report/plugin" />
       <excludeFolder url="file://$MODULE_DIR$/allure-report/widgets" />
       <excludeFolder url="file://$MODULE_DIR$/log" />
+      <excludeFolder url="file://$MODULE_DIR$/BaiDuOCR/ocr_screenshots" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
