@@ -1,8 +1,6 @@
 import allure
 import pytest
 
-from userFunctions.Functions import Functions as f
-
 
 class TestDemo:
 
@@ -21,10 +19,8 @@ class TestDemo:
         # f.goToDesAndCleanUpData(ad)
 
     def test4(self, ad):
-        # output,_ = f.cmd(['adb', 'devices'])
-        # ad.start_activity('air.tv.douyu.android','com.douyu.module.home.pages.main.MainActivity')
-        f.call('10086')
-        # print(ad.current_activity)
+        print(ad.is_locked())
+        ad.reset()
 
 
 
