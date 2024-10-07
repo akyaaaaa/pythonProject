@@ -9,3 +9,4 @@ PROJECT_ROOT = os.path.dirname(CUREE_DIR)
 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 # 截图路径join意思就是用分号把变量拼接起来
 OCR_SCREENSHOT_PATH = os.path.join(PROJECT_ROOT, 'BaiDuOCR', 'ocr_screenshots', f'screenshot{timestamp}.png')
+JOSN_ROOT_PATH = os.path.join(PROJECT_ROOT, 'TestData')

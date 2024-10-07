@@ -4,6 +4,19 @@ from Base.Base import Base
 
 
 class Functions:
+
+    # 回到桌面并清理数据
+    @staticmethod
+    def goToDesAndCleanUpData(d):
+        # # 模拟按下 home 键
+        # d.press_keycode(3)
+        # # 模拟按下 Recent 键
+        # d.press_keycode(187)
+        Functions.Press(d, 'home')
+        Functions.Press(d, 'recent')
+        Base(d).few('xpath', '//*[@content-desc="清除全部-按钮"]').click()
+
+    # 创建按键名称到键码的映射表，可以自己添加
     keycode_map = {
         "home": 3,
         "recent": 187,
@@ -19,24 +32,15 @@ class Functions:
 
         # 添加更多按键映射
     }
-    # 回到桌面并清理数据
     @staticmethod
-    def goToDesAndCleanUpData(d):
-        # # 模拟按下 home 键
-        # d.press_keycode(3)
-        # # 模拟按下 Recent 键
-        # d.press_keycode(187)
-        Functions.press(d, 'home')
-        Functions.press(d, 'recent')
-        Base(d).few('xpath', '//*[@content-desc="清除全部-按钮"]').click()
-
-    # 创建按键名称到键码的映射表，可以自己添加
-
-    @staticmethod
-    def press(d, kname):
+    def Press(d, kname):
         if kname in Functions.keycode_map:
             d.press_keycode(Functions.keycode_map[kname])
 
+    @staticmethod
+    def LongPress(d, kname):
+        if kname in Functions.keycode_map:
+            d.long_press_keycode(Functions.keycode_map[kname])
 
         else:
             raise ValueError("Invalid key name")
@@ -85,7 +89,6 @@ class Functions:
         Functions.cmd(command)
 
     @staticmethod
-    def end_call(number, device='aeada375'):
-        # adb -s 1234567890123456 shell input keyevent 6
+    def end_call(device='aeada375'):
         command = ['adb', '-s', f'{device}', 'shell', 'input', 'keyevent', '6']
         Functions.cmd(command)

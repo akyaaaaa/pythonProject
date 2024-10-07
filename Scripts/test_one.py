@@ -19,8 +19,8 @@ class TestDemo:
         # f.goToDesAndCleanUpData(ad)
 
     def test4(self, ad):
-        print(ad.is_locked())
-        ad.reset()
+        # print(ad.is_locked())
+        ad.long_press_keycode(26)
 
 
 
