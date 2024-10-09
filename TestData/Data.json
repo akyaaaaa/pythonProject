@@ -11,7 +11,8 @@
   "AppiumOptionsBy_3_xx": {
     "command_executor": "http://127.0.0.1:4723/wd/hub",
     "platformName": "Android",
-    "deviceName": "10AD6S114A0017E"
+    "device1Name": "10AD6S114A0017E",
+    "device2Name": "aeada375"
 
   }
 }

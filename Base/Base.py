@@ -1,5 +1,4 @@
 import base64
-import logging
 
 import allure
 import pytest
@@ -10,10 +9,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from BaiDuOCR.ocr import return_local
-from userConf.config import OCR_SCREENSHOT_PATH
 from TestData.JsonTools import Dataloader
-# 创建一个logger对象
-logger = logging.getLogger("my logger")
+from log.logConfig import logger
+from userConf.config import OCR_SCREENSHOT_PATH, screenshots, picture
 
 black_list = [
     (AppiumBy.ID, "com.vivo.health:id/positiveButton")
@@ -30,7 +28,7 @@ class Base:
     def take_screenshot(self, filename):
         # 从当前时间获取一个格式化的数字
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        screenshot_dir = "screenshots"
+        screenshot_dir = screenshots
         if not os.path.exists(screenshot_dir):
             os.makedirs(screenshot_dir)
         filepath = os.path.join(screenshot_dir, f"{filename}_{timestamp}.png")
@@ -56,7 +54,10 @@ class Base:
                         elements[0].click()
                         return func(*args, **kwargs)
                 # 遍历完黑名单之后，如果仍然没有找到元素，就抛出异常
-                self.add_screenshot_to_allure("错误截图")
+
+                logger.info("错误截图已关闭，打开请到Base.py->black_wrapper()")
+                # self.add_screenshot_to_allure("错误截图")
+
                 logger.error(f"遍历黑名单，仍然未找到元素信息————>>{e}")
                 raise e
 
@@ -102,9 +103,6 @@ class Base:
         print(local)
         self.driver.tap([(local[0], local[1])])
 
-    # except Exception as e:
-    #     return '未找到元素'
-
 
 
     def add_screenshot_to_allure(self, name, attachment_type=allure.attachment_type.PNG):
@@ -126,16 +124,22 @@ class Base:
         return video_data
 
     # 图像识别
-    def ClickByImage(self, imgPath):
+    def ClickByImage(self, imgName):
         # 使用 Airtest 进行图像识别
+        global dev
         try:
             # 连接 Airtest 设备
             data = Dataloader('Data.json').load()
-            dev = connect_device(f"Android:///{data.AppiumOptionsBy_3_xx.deviceName}")
+            device_id = data.AppiumOptionsBy_3_xx.device2Name
+            dev = connect_device(f"Android:///{data.AppiumOptionsBy_3_xx.device2Name}")
 
+            # dev = Android(serialno=device_id)
             assert dev is not None, "设备连接失败"
+            FindImgPath = os.path.join(picture, imgName)
+            if not os.path.exists(FindImgPath):
+                os.makedirs(FindImgPath)
             # 定义模板
-            template = Template(imgPath)
+            template = Template(FindImgPath)
             # 匹配图像并获取位置
             pos = exists(template)
             if pos:
@@ -147,10 +151,14 @@ class Base:
                 # assert exists(Template(r"aixin.jpg")), "登录成功"
             else:
                 logger.error("图像未找到")
+                # 显示地使得用例失败，且推出测试
                 pytest.fail("图像未找到")
         except TargetNotFoundError:
             pytest.fail("图像未找到")
-
+        finally:
+            # 断开设备连接
+            dev.disconnect()
+            logger.info("设备airtest连接已断开")
 # Check部分--------------------------------------------------------------------------------------------------------------
     def scroll_down(self):
         size = self.driver.get_window_size()

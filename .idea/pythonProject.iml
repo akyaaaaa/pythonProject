@@ -7,7 +7,6 @@
       <excludeFolder url="file://$MODULE_DIR$/Scripts/screenshots" />
       <excludeFolder url="file://$MODULE_DIR$/FailureVideo" />
       <excludeFolder url="file://$MODULE_DIR$/screenshots" />
-      <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/Scripts/FailureVideo" />
       <excludeFolder url="file://$MODULE_DIR$/allure-report/data" />
       <excludeFolder url="file://$MODULE_DIR$/allure-report/export" />
@@ -15,8 +14,11 @@
       <excludeFolder url="file://$MODULE_DIR$/allure-report/plugin" />
       <excludeFolder url="file://$MODULE_DIR$/allure-report/widgets" />
       <excludeFolder url="file://$MODULE_DIR$/BaiDuOCR/ocr_screenshots" />
+      <excludeFolder url="file://$MODULE_DIR$/AllureTemp" />
+      <excludeFolder url="file://$MODULE_DIR$/Resources" />
+      <excludeFolder url="file://$MODULE_DIR$/allure-report" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (pythonProject)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

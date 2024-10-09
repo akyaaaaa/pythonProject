@@ -1,6 +1,7 @@
 import subprocess
 
 from Base.Base import Base
+from log.logConfig import logger
 
 
 class Functions:
@@ -12,6 +13,7 @@ class Functions:
         # d.press_keycode(3)
         # # 模拟按下 Recent 键
         # d.press_keycode(187)
+        logger.info("Clean up data")
         Functions.Press(d, 'home')
         Functions.Press(d, 'recent')
         Base(d).few('xpath', '//*[@content-desc="清除全部-按钮"]').click()
