@@ -14,7 +14,9 @@ def setup_logger():
     logger = logging.getLogger("my_logger")
     logger.setLevel(logging.DEBUG)  # 设置日志级别为DEBUG
 
-    logFile_path = os.path.join(log_path, 'mylog.log')
+    if not os.path.exists(log_path):
+        os.makedirs(log_path)
+    logFile_path = log_path
     # 创建一个handler，用于写入日志文件
     fh = logging.FileHandler(logFile_path)
     fh.setLevel(logging.DEBUG)  # 也可以为handler单独设置日志级别
