@@ -4,6 +4,7 @@ import time
 import allure
 import pytest
 from appium import webdriver
+from appium.options.common import AppiumOptions
 from uiautomator2 import connect
 
 from Base.Base import Base
@@ -26,19 +27,24 @@ def d():
 # Appium 驱动
 @pytest.fixture(scope="session")
 def ad():
-    desired_caps = {
-        "platformName": "Android",
-        "platformVersion": "11",
-        # "deviceName": "aeada375",
-        "deviceName": "emulator-5554",
-        # 'noReset': True,
-        # 'unicodeKeyboard': True,  # 使用自带输入法，输入中文时填True
-        # 'resetKeyboard': True,  # 执行完程序恢复原来输入法
-    }
-
+    # desired_caps = {
+    #     "platformName": "Android",
+    #     "platformVersion": "11",
+    #     # "deviceName": "aeada375",
+    #     "deviceName": "emulator-5554",
+    #     # 'noReset': True,
+    #     # 'unicodeKeyboard': True,  # 使用自带输入法，输入中文时填True
+    #     # 'resetKeyboard': True,  # 执行完程序恢复原来输入法
+    # }
+    #
+    # # 连接Appium Server，初始化自动化环境
+    # driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
+    # print(f"连接成功 --> {desired_caps['deviceName']}")
+    options = AppiumOptions()
+    options.set_capability("platformName", "Android")
+    options.set_capability("deviceName", "10AD6S114A0017E")
     # 连接Appium Server，初始化自动化环境
-    driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
-    print(f"连接成功 --> {desired_caps['deviceName']}")
+    driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', options=options)
     yield driver
     driver.quit()
 
