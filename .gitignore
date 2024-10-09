@@ -7,8 +7,6 @@
 out
 gen
 temp
-FailureVideo
-screenshots
-Scripts/screenshots
 allure-report
-log
+*.log
+Resources/*
