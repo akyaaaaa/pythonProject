@@ -149,6 +149,19 @@ class Base:
         except TargetNotFoundError:
             pytest.fail("图像未找到")
 
+# Check部分--------------------------------------------------------------------------------------------------------------
+    def scroll_down(self):
+        size = self.driver.get_window_size()
+        x = size['width'] * 0.5
+        start_y = size['height'] * 0.8
+        end_y = size['height'] * 0.5
+        self.driver.swipe(x,start_y,x,end_y,duration=2000)
+    def scroll_up(self):
+        size = self.driver.get_window_size()
+        x = size['width'] * 0.5
+        start_y = size['height'] * 0.5
+        end_y = size['height'] * 0.8
+        self.driver.swipe(x, start_y, x, end_y, 5000)
 
 if __name__ == '__main__':
     print()
