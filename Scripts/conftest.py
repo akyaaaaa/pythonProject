@@ -7,6 +7,7 @@ from appium import webdriver
 from appium.options.common import AppiumOptions
 from uiautomator2 import connect
 
+from TestData.JsonTools import Dataloader
 from Base.Base import Base
 
 # 创建 FailureVideo 目录
@@ -40,11 +41,13 @@ def ad():
     # # 连接Appium Server，初始化自动化环境
     # driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
     # print(f"连接成功 --> {desired_caps['deviceName']}")
+    data = Dataloader('Data.json').load()
     options = AppiumOptions()
-    options.set_capability("platformName", "Android")
-    options.set_capability("deviceName", "10AD6S114A0017E")
+    options.set_capability("platformName", data.AppiumOptionsBy_3_xx.platformName)
+    options.set_capability("deviceName", data.AppiumOptionsBy_3_xx.deviceName)
     # 连接Appium Server，初始化自动化环境
-    driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', options=options)
+    driver = webdriver.Remote(data.AppiumOptionsBy_3_xx.command_executor, options=options)
+
     yield driver
     driver.quit()
 

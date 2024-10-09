@@ -13,4 +13,4 @@ class Dataloader():
         with open(self.path, 'r') as f:
             # 从JSON文件中加载数据，并将其解析为SimpleNamespace对象
             data = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
-        return
+        return data

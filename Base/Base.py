@@ -11,9 +11,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from BaiDuOCR.ocr import return_local
 from userConf.config import OCR_SCREENSHOT_PATH
-
+from TestData.JsonTools import Dataloader
 # 创建一个logger对象
 logger = logging.getLogger("my logger")
+
 black_list = [
     (AppiumBy.ID, "com.vivo.health:id/positiveButton")
 ]
@@ -129,7 +130,8 @@ class Base:
         # 使用 Airtest 进行图像识别
         try:
             # 连接 Airtest 设备
-            dev = connect_device("Android:///aeada375")
+            data = Dataloader('Data.json').load()
+            dev = connect_device(f"Android:///{data.AppiumOptionsBy_3_xx.deviceName}")
 
             assert dev is not None, "设备连接失败"
             # 定义模板

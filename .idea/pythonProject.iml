@@ -2,6 +2,7 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Scripts" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.pytest_cache/v" />
       <excludeFolder url="file://$MODULE_DIR$/Scripts/screenshots" />
       <excludeFolder url="file://$MODULE_DIR$/FailureVideo" />
@@ -13,7 +14,6 @@
       <excludeFolder url="file://$MODULE_DIR$/allure-report/history" />
       <excludeFolder url="file://$MODULE_DIR$/allure-report/plugin" />
       <excludeFolder url="file://$MODULE_DIR$/allure-report/widgets" />
-      <excludeFolder url="file://$MODULE_DIR$/log" />
       <excludeFolder url="file://$MODULE_DIR$/BaiDuOCR/ocr_screenshots" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11 (pythonProject)" jdkType="Python SDK" />
